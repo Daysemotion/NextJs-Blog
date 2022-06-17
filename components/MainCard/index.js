@@ -1,36 +1,18 @@
 import React from "react";
-import { Typography, Card, Avatar, Button } from "antd";
+import { Card, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import styled from "styled-components";
-
-const StyledMainCard = styled.div`
-  position: relative;
-  margin-top: 100px;
-`;
-
-const TitleStyle = styled(Typography.Title)`
-  text-align: center;
-`;
-
-const MainCardWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-`;
-
-const CardStyle = styled(Card)`
-  margin: 0 20px;
-`;
-
-const CardButton = styled(Button)`
-  display: block;
-  margin: 0 auto;
-  margin-top: 4rem;
-  margin-bottom: 50px;
-`;
-
+import {
+  CardButton,
+  CardStyle,
+  MainCardWrapper,
+  StyledMainCard,
+  TitleStyle,
+} from "./mainCardStyle";
+import { useSelector } from "react-redux";
 const MainCard = ({ title }) => {
+  const content = useSelector((state) => state.post.user);
+  console.log(content);
+
   return (
     <StyledMainCard>
       <TitleStyle level={2}>{title}</TitleStyle>

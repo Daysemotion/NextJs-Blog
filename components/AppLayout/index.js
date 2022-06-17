@@ -2,14 +2,19 @@ import React, { useState, useCallback } from "react";
 
 import { Layout } from "antd";
 import { Menu } from "antd";
-import "antd/dist/antd.css";
 import { IoMoonSharp, IoSunnyOutline, IoSearchOutline } from "react-icons/io5";
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const { Header, Content } = Layout;
 
 const HeaderStyle = styled(Header)`
+  position: fixed;
+  z-index: 6000;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,8 +37,7 @@ const IconWrapper = styled.div`
   align-items: center;
 
   & div {
-    padding: 0px 10px;
-    margin: 0px 5px;
+    padding-left: 1rem;
 
     & svg {
       font-size: 1.125rem;
@@ -43,6 +47,7 @@ const IconWrapper = styled.div`
 `;
 
 const AppLayout = ({ children }) => {
+  const router = useRouter();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const onDarkmode = useCallback(() => {
     setIsDarkMode((prev) => !prev);
@@ -70,7 +75,7 @@ const AppLayout = ({ children }) => {
           <a>About</a>
         </Link>
       ),
-      key: "Abou323t",
+      key: "About",
     },
   ];
 
@@ -78,7 +83,17 @@ const AppLayout = ({ children }) => {
     <Layout>
       <HeaderStyle>
         <h1>blog</h1>
-        <MenuStyle mode="horizontal" items={menuItems}></MenuStyle>
+        <MenuStyle
+          mode="horizontal"
+          items={menuItems}
+          defaultSelectedKeys={
+            router.pathname === "/"
+              ? ["Blog"]
+              : router.pathname === "/post"
+              ? ["Post"]
+              : ["About"]
+          }
+        ></MenuStyle>
         <IconWrapper>
           <div onClick={onDarkmode}>
             {isDarkMode ? <IoSunnyOutline /> : <IoMoonSharp />}

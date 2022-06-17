@@ -3,8 +3,7 @@ import React from "react";
 import AppLayout from "../components/AppLayout";
 import styled from "styled-components";
 import { UserOutlined, GithubOutlined, AuditOutlined } from "@ant-design/icons";
-import MainCard from "../components/Main/MainCard";
-const { Title } = Typography;
+import MainCard from "../components/MainCard";
 
 const MainInfoCard = styled.div`
   position: relative;
